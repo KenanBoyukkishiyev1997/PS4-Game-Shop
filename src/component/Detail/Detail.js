@@ -1,0 +1,55 @@
+import React from 'react'
+import { DataContext } from '../Context/Context'
+import {Link} from 'react-router-dom'
+import Colors from '../Colors/Colors'
+import '../Header/Header.scss'
+class Detail extends React.Component {
+    static contextType = DataContext
+
+    state = {
+        product: []
+    }
+    getProduct = () => {
+        if (this.props.match.params.id) {
+            const res = this.context.products
+            const data = res.filter(item => {
+                return item._id === this.props.match.params.id
+            })
+            this.setState({ product: data })
+        }
+    }
+
+    componentDidMount() {
+        this.getProduct()
+    }
+
+    render() {
+        const { product } = this.state
+        const {addCart} = this.context
+        return (
+            <>
+                {
+                    product.map(item => (
+                        <div className='details' key={item._id}>
+                            <img src={item.src} alt='' />
+
+                            <div className='box'>
+                                <div className='row'>
+                                    <h2>{item.title}</h2>
+                                    <span>${item.price}</span>
+                                </div>
+                                <p><Colors colors={item.colors} /></p>
+                                <p>{item.description}</p>
+                                <p>{item.content}</p>
+                                <Link to='/cart' className='cart' onClick={()=>addCart(item._id)}>Add To Card</Link>
+                                <Link to='/' className='cart'>Go Back </Link>
+                            </div>
+                        </div>
+                    ))
+                }
+            </>
+        )
+    }
+}
+
+export default Detail

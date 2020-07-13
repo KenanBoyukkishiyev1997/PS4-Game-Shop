@@ -1,0 +1,102 @@
+@import '../Products/Products';
+@import '../Detail/Details';
+@import '../Cart/Cart';
+header{
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+
+
+    .menu{
+        cursor: pointer;
+        display: none;
+    }
+
+    .close{
+        cursor: pointer;
+        display: none;
+    }
+
+    .logo{
+        a{
+        color: black;
+        text-decoration: none;
+        text-transform: uppercase;
+        }
+    }
+
+    nav{
+        display: flex;
+        ul{
+            list-style: none;
+            li{
+                display: inline-block;
+                a{
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    color: #555;
+                    padding: 0 15px;
+                    transition: .5 ease-in;
+                    &:hover{
+                        color: #20b2aa;
+                    }
+                }
+            }
+        }
+
+        .nav-cart{
+            cursor: pointer;
+            position: relative;
+
+            span{
+                position: absolute;
+                top: -12px;
+                right: -7px;
+                background-color: red;
+                color: #fff;
+                font-size: 10px;
+                padding: 3px 5px;
+                border-radius: 50%;
+                z-index: -1;
+            }
+        }
+    }
+}
+
+@media (max-width:650px){
+    header{
+    
+        .menu{
+            display: block;
+        }
+    
+        .close{
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        ul{
+            position: fixed;
+            top: -100%;
+            left: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+            background-color: white;
+            z-index: 99;
+            opacity: 0.9;
+            transition: 0.5 linear;
+        }
+
+        ul.toggle{
+            top: 0;
+        }
+    }
+}
